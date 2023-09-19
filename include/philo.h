@@ -32,17 +32,17 @@
 
 typedef struct s_arg
 {
-	int						total;
-	int						die;
-	int						eat;
-	int						sleep;
+	int						philos_count;
+	int						time_to_die;
+	int						time_of_eating;
+	int						time_of_sleeping;
 	int						meals_to_eat;
 	long int				start_t;
 	pthread_mutex_t			write_mutex;
 	pthread_mutex_t			dead;
 	pthread_mutex_t			time_eat;
 	pthread_mutex_t			finish;
-	int						nb_p_finish;
+	int						nb_philo_finish;
 	int						stop;
 }							t_arg;
 
@@ -59,50 +59,48 @@ typedef struct s_philo
 	int						finish;
 }							t_philo;
 
-typedef struct s_p
+typedef struct s_main
 {
-	t_philo					*ph;
+	t_philo					*philo;
 	t_arg					a;
-}							t_p;
+}							t_main;
 
 // activity.c
-void	write_status(char *str, t_philo *ph);
-void	sleep_think(t_philo *ph);
-void	activity(t_philo *ph);
+void		print_info(t_philo *philos, char *str, const char *colorCode);
+void		sleep_think(t_philo *philos);
+void		activity(t_philo *philos);
 
 //args.c
-void	check_argc(int argc);
-int	check_argv(char **argv);
+void		check_args(int argc, char **argv);
+int			check_argv(char **argv);
 
 //init.c
-int		ft_atoi(const char *str);
-int		numeric(char **argv);
-int		init_struct(char **argv, t_p *p);
-void	init_mutex(t_p *p);
-int		initialize(t_p *p);
+void			init_struct(char **argv, t_main *main);
+void		init_mutex(t_main *main);
+int			init_rest(t_main *main);
 
 //main.c
-int	error_msg(char *str);
-int		ft_exit(char *str);
-int		check_for_death2(t_p *p);
-void	check_philosophers_ate(t_p *p);
-int		main(int argc, char **argv);
-// + one static func
+int			error_msg(char *str);
+int			check_for_death2(t_main *main);
+void		ft_end(t_main *main);
+int			create_philo(t_main *main);
+int			main(int argc, char **argv);
 
 //threads.c
-void	*is_dead(void	*data);
-void	*thread(void *data);
-int	threading(t_p *p);
+void		*is_dead(void	*data);
+void		*thread(void *data);
+int			create_threads(t_main *main);
 
 //utils_libft.c
-int	is_numeric_string(const char *str);
-int	ft_atoi(const char *str);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(long int ln, int fd);
-int		ft_strlen(char *str);
+int			is_numeric_string(const char *str);
+int			ft_atoi(const char *str);
+void		ft_mainutchar_fd(char c, int fd);
+void		ft_mainutnbr_fd(long int ln, int fd);
+int			ft_strlen(char *str);
 //+ 2 static functions
+
 //utils.c
-int	check_death(t_philo *ph, int i);
+int			check_death(t_philo *philos, int i);
 long int	actual_time(void);
-void	ft_usleep(long int time_in_ms);
+void		ft_usleep(long int time_in_ms);
 #endif
