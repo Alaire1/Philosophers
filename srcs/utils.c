@@ -6,11 +6,17 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:48 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/20 00:59:32 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/20 04:25:11 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	error_msg(char *str)
+{
+	printf("%sError: %s%s\n", RED, str, RESET);
+	return (1);
+}
 
 long int	actual_time(void)
 {

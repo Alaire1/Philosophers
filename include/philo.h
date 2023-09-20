@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:16 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/20 01:21:13 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/20 04:26:11 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ int			check_argv(char **argv);
 
 //init.c
 void		init_struct(char **argv, t_main *main);
-int			init_philosophers(t_main *main);
+void		init_philosophers(t_main *main);
 void		init_mutex(t_main *main);
-int			init_rest(t_main *main);
+void		init_rest(t_main *main);
 
 //main.c
-int			error_msg(char *str);
+void		destroy_mutexes(t_main *main);
 void		ft_end(t_main *main);
 int			create_threads(t_main *main);
 int			create_philo(t_main *main);
@@ -112,6 +112,7 @@ int			ft_atoi(const char *str);
 //+ 2 static functions
 
 //utils.c
+int			error_msg(char *str);
 int			check_death(t_philo *philos, int i);
 long int	actual_time(void);
 void		ft_usleep(long int time_in_ms);
