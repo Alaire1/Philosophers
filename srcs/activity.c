@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   activity.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 00:09:23 by akaraban          #+#    #+#             */
+/*   Updated: 2023/09/20 01:02:34 by akaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
-
-void	print_info(t_philo *philos, char *str, const char *colorCode)
-{
-	long int		time;
-
-	// time = -1;
-	time = actual_time() - philos->pa->start_t;
-	if (time >= 0 && time <= 2147483647 && !check_death(philos, 0))
-	{
-		printf("%ld %d %s%s%s\n", time, philos->id, colorCode, str, RESET);
-	}
-}
 
 void	sleep_think(t_philo *philos)
 {

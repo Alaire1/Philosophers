@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 00:09:16 by akaraban          #+#    #+#             */
+/*   Updated: 2023/09/20 01:21:13 by akaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -37,7 +49,7 @@ typedef struct s_arg
 	int						time_of_eating;
 	int						time_of_sleeping;
 	int						meals_to_eat;
-	long int				start_t;
+	long int				start_time;
 	pthread_mutex_t			write_mutex;
 	pthread_mutex_t			dead;
 	pthread_mutex_t			time_eat;
@@ -62,7 +74,7 @@ typedef struct s_philo
 typedef struct s_main
 {
 	t_philo					*philo;
-	t_arg					a;
+	t_arg					info;
 }							t_main;
 
 // activity.c
@@ -75,28 +87,28 @@ void		check_args(int argc, char **argv);
 int			check_argv(char **argv);
 
 //init.c
-void			init_struct(char **argv, t_main *main);
+void		init_struct(char **argv, t_main *main);
+int			init_philosophers(t_main *main);
 void		init_mutex(t_main *main);
 int			init_rest(t_main *main);
 
 //main.c
 int			error_msg(char *str);
-int			check_for_death2(t_main *main);
 void		ft_end(t_main *main);
+int			create_threads(t_main *main);
 int			create_philo(t_main *main);
 int			main(int argc, char **argv);
 
-//threads.c
+//philo.c
+int			create_philo(t_main *main);
 void		*is_dead(void	*data);
-void		*thread(void *data);
-int			create_threads(t_main *main);
+int			check_for_death2(t_main *main);
+int			check_death(t_philo *philo, int i);
+void		*start_routine(void *data);
 
 //utils_libft.c
 int			is_numeric_string(const char *str);
 int			ft_atoi(const char *str);
-void		ft_mainutchar_fd(char c, int fd);
-void		ft_mainutnbr_fd(long int ln, int fd);
-int			ft_strlen(char *str);
 //+ 2 static functions
 
 //utils.c

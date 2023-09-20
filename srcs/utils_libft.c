@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_libft.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 00:09:44 by akaraban          #+#    #+#             */
+/*   Updated: 2023/09/20 00:09:45 by akaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 static int	ft_isspace(char c)
@@ -52,40 +64,4 @@ int	is_numeric_string(const char *str)
 		i++;
 	}
 	return (0);
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	if (fd >= 0)
-		write(fd, &c, 1);
-}
-
-
-void	ft_putnbr_fd(long int ln, int fd)
-{
-	if (ln < 0)
-	{
-		ln *= -1;
-		ft_putchar_fd('-', fd);
-	}
-	if (ln >= 10)
-	{
-		ft_putnbr_fd(ln / 10, fd);
-		ft_putnbr_fd(ln % 10, fd);
-	}
-	else
-	{
-		if (fd >= 0)
-			ft_putchar_fd(ln + 48, fd);
-	}
-}
-
-int	ft_strlen(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
 }

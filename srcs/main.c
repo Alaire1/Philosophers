@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 00:09:36 by akaraban          #+#    #+#             */
+/*   Updated: 2023/09/20 01:23:56 by akaraban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 int error_msg(char *str) 
@@ -6,39 +18,49 @@ int error_msg(char *str)
    	return (1);
 }
 
-int	check_death2(t_main *main)
-{
-	pthread_mutex_lock(&main->a.dead);
-	if (main->a.stop)
-	{
-		pthread_mutex_unlock(&main->a.dead);
-		return (1);
-	}
-	pthread_mutex_unlock(&main->a.dead);
-	return (0);
-}
-
 void	ft_end(t_main *main)
 {
 	int	i;
 
-	i = -1;
-	while (!check_death2(main))
+	i = 0;
+	while (!check_for_death2(main))
 		ft_usleep(1);
-	while (++i < main->a.philos_count)
+	while (i < main->info.philos_count)
+	{
 		pthread_join(main->philo[i].thread_id, NULL);
-	pthread_mutex_destroy(&main->a.write_mutex);
-	i = -1;
-	while (++i < main->a.philos_count)
+		i++;
+	}
+	pthread_mutex_destroy(&main->info.write_mutex);
+	i = 0;
+	while (i < main->info.philos_count)
+	{
 		pthread_mutex_destroy(&main->philo[i].left_fork);
-	if (main->a.stop == 2)
-		printf("Each philosopher ate %d time(s)\n", main->a.meals_to_eat);
+		i++;
+	}
+	if (main->info.stop == 2)
+		printf("%sEvery philosopher has eaten%s %s%d%s %stime(s)%s\n",
+       GREEN, RESET, YELLOW, main->info.meals_to_eat, RESET, GREEN, RESET);
 	free(main->philo);
+}
+
+int	create_threads(t_main *main)
+{
+	int	i;
+
+	i = 0;
+	while (i < main->info.philos_count)
+	{
+		main->philo[i].pa = &main->info;
+		if (pthread_create(&main->philo[i].thread_id, NULL, start_routine, &main->philo[i]) != 0)
+			return (error_msg("Pthread error\n"));
+		i++;
+	}
+	return (1);
 }
 
 int create_philo(t_main *main)
 {
-    main->philo = malloc(sizeof(t_philo) * main->a.philos_count);
+    main->philo = malloc(sizeof(t_philo) * main->info.philos_count);
     if (!main->philo) 
 	{
 		error_msg("Allocation unsuccessfull");
@@ -46,7 +68,6 @@ int create_philo(t_main *main)
     }
     return (0);
 }
-
 
 int	main(int argc, char **argv)
 {
