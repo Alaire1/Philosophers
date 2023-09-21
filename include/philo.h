@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:16 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/20 04:26:11 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 03:08:04 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ typedef struct s_main
 
 // activity.c
 void		print_info(t_philo *philos, char *str, const char *colorCode);
-void		sleep_think(t_philo *philos);
+void		philo_sleep(t_philo *philos);
+void		philo_think(t_philo *philos);
+void		philo_eat(t_philo *philos);
+// 
+
 void		activity(t_philo *philos);
 
 //args.c

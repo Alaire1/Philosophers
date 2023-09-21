@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:48 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/20 04:25:11 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 04:55:29 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,5 @@ void	print_info(t_philo *philos, char *str, const char *colorCode)
 
 	time = actual_time() - philos->pa->start_time;
 	if (time >= 0 && time <= 2147483647 && !check_death(philos, 0))
-	{
 		printf("%ld %d %s%s%s\n", time, philos->id, colorCode, str, RESET);
-	}
 }

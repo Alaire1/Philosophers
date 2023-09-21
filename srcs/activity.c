@@ -6,24 +6,27 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:23 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/20 01:02:34 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 01:04:57 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	sleep_think(t_philo *philos)
+void	philo_sleep(t_philo *philos)
 {
 	pthread_mutex_lock(&philos->pa->write_mutex);
 	print_info(philos, "is sleeping", BG_BLUE);
 	pthread_mutex_unlock(&philos->pa->write_mutex);
 	ft_usleep(philos->pa->time_of_sleeping);
+	
+}
+void	philo_think(t_philo *philos)
+{
 	pthread_mutex_lock(&philos->pa->write_mutex);
 	print_info(philos, "is thinking", BG_GREEN);
 	pthread_mutex_unlock(&philos->pa->write_mutex);
 }
-
-void	activity(t_philo *philos)
+void philo_eat(t_philo *philos)
 {
 	pthread_mutex_lock(&philos->left_fork);
 	pthread_mutex_lock(&philos->pa->write_mutex);
@@ -47,5 +50,11 @@ void	activity(t_philo *philos)
 	ft_usleep(philos->pa->time_of_eating);
 	pthread_mutex_unlock(philos->right_fork);
 	pthread_mutex_unlock(&philos->left_fork);
-	sleep_think(philos);
+}
+
+void	activity(t_philo *philos)
+{
+	philo_eat(philos);
+	philo_sleep(philos);
+	philo_think(philos);
 }

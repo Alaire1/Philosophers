@@ -6,7 +6,7 @@
 #    By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 17:34:54 by akaraban          #+#    #+#              #
-#    Updated: 2023/09/20 04:28:50 by akaraban         ###   ########.fr        #
+#    Updated: 2023/09/21 03:10:02 by akaraban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ BG_WHITE = \033[47m
 NAME		=	philo
 HEADER		=	./include/
 CC			=	gcc
-CFLAGS		=	-Werror -Wall -Wextra -fsanitize=thread -g -I $(HEADER) -pthread
+CFLAGS		=	-Werror -Wall -Wextra  -g -I $(HEADER) -pthread
 SOURCE_DIR 	= 	srcs
 
 SRCS		=	srcs/activity.c \
