@@ -6,16 +6,15 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:36 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/20 04:27:10 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 05:24:37 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-
-void destroy_mutexes(t_main *main)
+void	destroy_mutexes(t_main *main)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < main->info.philos_count)

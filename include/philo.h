@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:16 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/21 03:08:04 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 05:33:18 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ typedef struct s_main
 }							t_main;
 
 // activity.c
-void		print_info(t_philo *philos, char *str, const char *colorCode);
 void		philo_sleep(t_philo *philos);
 void		philo_think(t_philo *philos);
 void		philo_eat(t_philo *philos);
-// 
-
 void		activity(t_philo *philos);
 
 //args.c
@@ -104,7 +101,7 @@ int			create_philo(t_main *main);
 int			main(int argc, char **argv);
 
 //philo.c
-int			create_philo(t_main *main);
+void		thread_main_logic(t_philo *ph);
 void		*is_dead(void	*data);
 int			check_for_death2(t_main *main);
 int			check_death(t_philo *philo, int i);
@@ -116,6 +113,7 @@ int			ft_atoi(const char *str);
 //+ 2 static functions
 
 //utils.c
+void		print_info(t_philo *philos, char *str, const char *colorCode);
 int			error_msg(char *str);
 int			check_death(t_philo *philos, int i);
 long int	actual_time(void);

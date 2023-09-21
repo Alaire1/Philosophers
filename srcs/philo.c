@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:40 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/21 03:16:35 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 05:30:23 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,37 @@ void	*is_dead(void	*data)
 	return (NULL);
 }
 
-
-void *start_routine(void *data)
+void	thread_main_logic(t_philo *ph)
 {
-    t_philo *ph = (t_philo *)data;
-    
-    if (ph->id % 2 == 0)
-        ft_usleep(ph->pa->time_of_eating / 10);
-    pthread_create(&ph->thread_death_id, NULL, is_dead, data);
-    while (!check_death(ph, 0))
-    {
-        activity(ph);
-        if ((int)++ph->nb_eat == ph->pa->meals_to_eat)
-        {
-            pthread_mutex_lock(&ph->pa->finish);
-            ph->finish = 1;
-            ph->pa->nb_philo_finish++;
-            if (ph->pa->nb_philo_finish == ph->pa->philos_count)
-            {
-                pthread_mutex_unlock(&ph->pa->finish);
-                check_death(ph, 2);
-                break;
-            }
-            pthread_mutex_unlock(&ph->pa->finish);
-            break;
-        }
-    }
-    pthread_join(ph->thread_death_id, NULL);
-    return NULL;
+	while (!check_death(ph, 0))
+	{
+		activity(ph);
+		if ((int)++ph->nb_eat == ph->pa->meals_to_eat)
+		{
+			pthread_mutex_lock(&ph->pa->finish);
+			ph->finish = 1;
+			ph->pa->nb_philo_finish++;
+			if (ph->pa->nb_philo_finish == ph->pa->philos_count)
+			{
+				pthread_mutex_unlock(&ph->pa->finish);
+				check_death(ph, 2);
+				break ;
+			}
+			pthread_mutex_unlock(&ph->pa->finish);
+			break ;
+		}
+	}
 }
 
+void	*start_routine(void *data)
+{
+	t_philo	*ph;
+
+	ph = (t_philo *)data;
+	if (ph->id % 2 == 0)
+		ft_usleep(ph->pa->time_of_eating / 10);
+	pthread_create(&ph->thread_death_id, NULL, is_dead, data);
+	thread_main_logic(ph);
+	pthread_join(ph->thread_death_id, NULL);
+	return (NULL);
+}
