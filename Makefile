@@ -6,7 +6,7 @@
 #    By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 17:34:54 by akaraban          #+#    #+#              #
-#    Updated: 2023/09/21 03:10:02 by akaraban         ###   ########.fr        #
+#    Updated: 2023/09/22 01:38:20 by akaraban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECT_FILES) $(HEADER)
 	@echo "$(YELLOW)$$BANNER$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJECT_FILES) -o $(NAME)
+	@$(CC) $(CFLAGS)  $(OBJECT_FILES) -o $(NAME)
 	@echo "$(GREEN)✅ Compilation went succesfull$(RESET)"
 	@echo "$(ORANGE)To run program, type: ./philo <number_of_philosophers> <time_to_die> \
 	<time_of_eating> <time_of_sleeping> optional: <number_of_times_each_philosopher_must_eat>$(RESET)"

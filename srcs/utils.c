@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:48 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/21 04:55:29 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/22 03:11:31 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ void	ft_usleep(long int time_in_ms)
 {
 	long int	start_time;
 
-	start_time = 0;
 	start_time = actual_time();
 	while ((actual_time() - start_time) < time_in_ms)
-		usleep(time_in_ms / 10);
+		usleep(50);
 }
 
 void	print_info(t_philo *philos, char *str, const char *colorCode)

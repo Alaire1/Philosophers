@@ -6,7 +6,7 @@
 /*   By: akaraban <akaraban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:09:40 by akaraban          #+#    #+#             */
-/*   Updated: 2023/09/21 05:30:23 by akaraban         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:58:51 by akaraban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	*start_routine(void *data)
 
 	ph = (t_philo *)data;
 	if (ph->id % 2 == 0)
-		ft_usleep(ph->pa->time_of_eating / 10);
-	pthread_create(&ph->thread_death_id, NULL, is_dead, data);
+		ft_usleep(10);
+	pthread_create(&ph->thread_death_id, NULL, is_dead, ph);
 	thread_main_logic(ph);
 	pthread_join(ph->thread_death_id, NULL);
 	return (NULL);
